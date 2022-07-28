@@ -9,8 +9,8 @@
 
 module.exports = class naber{
 
-    getName () {
-		return "Tavus Modu";
+    	getName () {
+		return "TavusModu";
 	}
 
 	getVersion () {
