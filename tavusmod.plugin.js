@@ -1,8 +1,9 @@
 /**
-* @name QWE
-* @description sex
-* @version 0.3.1
-* @author zaa
+* @name tavusmod
+* @description Tavus Modu 😎
+* @version 0.0.1
+* @author xEnsar69
+* @authorId 522834911732695041
 * @updateUrl https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js
 */
 
@@ -13,7 +14,7 @@ module.exports = class naber{
 	}
 
 	getVersion () {
-		return "0.3.2";
+		return "0.3.1";
 	}
 
 	getAuthor () {
