@@ -3,6 +3,7 @@
 * @description sex
 * @version 0.3.1
 * @author zaa
+* @updateUrl https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js
 */
 
 module.exports = class naber{
