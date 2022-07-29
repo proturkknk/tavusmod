@@ -12,7 +12,7 @@ module.exports = class naber{
     constructor(){
     }
 
-    getName () {
+    	getName () {
 		return "TavusModu";
 	}
 
