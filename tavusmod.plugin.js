@@ -1,7 +1,7 @@
 /**
 * @name tavusmod
 * @description Tavus Modu 😎
-* @version 0.0.1
+* @version 0.0.2
 * @author xEnsar69
 * @authorId 522834911732695041
 * @updateUrl https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js
@@ -12,12 +12,12 @@ module.exports = class naber{
     constructor(){
     }
 
-    	getName () {
+    getName () {
 		return "TavusModu";
 	}
 
 	getVersion () {
-		return "0.0.1";
+		return "0.0.2";
 	}
 
 	getAuthor () {
@@ -143,23 +143,30 @@ module.exports = class naber{
     }
 
     checkForUpdates(){
-        require("https").get("https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js", res => {
-            var str = ""
+        require("https").get("https://raw.githubusercontent.com/proturkknk/tavusmod/main/version.txt", res => {
+            var ver = ""
             res.on("data", chunk => {
-                str += chunk
+                ver += chunk
             })
 
             res.on("end", () => {
-                const fs = require("fs")
-                fs.readFile(require("path").join(__dirname,__filename), "utf-8", (err, data) => {
-                    if(data != str){
-                        BdApi.alert("HEY HEY HEY", "GÜNCELLEME VAR")
-                    }
-                })
+                if(this.getVersion() != ver){
+                    BdApi.alert("HEY HEY HEY", "GÜNCELLEME VAR (Otomatik olarak indiriliyor)")
+                    require("https").get("https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js", res => {
+                        var data = ""
+                        res.on("data", chunk => {
+                            data += chunk
+                        })
+                        res.on("end", () => {
+                            const fs = require("fs")
+                            fs.writeFile(require("path").join(__dirname, __filename), data, (e) => {})
+                        })
+                    })
+                }
             })
         })
     }
-    whatnew = "naber"
+    whatnew = "Yenilikler: Öyle işte blm"
 
     start(){
         if(BdApi.getData("TavusModu", "new") != this.whatnew){
