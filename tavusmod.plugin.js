@@ -150,6 +150,7 @@ module.exports = class naber{
             })
 
             res.on("end", () => {
+                ver = ver.replace("\n", "")
                 if(this.getVersion() != ver){
                     BdApi.alert("HEY HEY HEY", "GÜNCELLEME VAR (Otomatik olarak indiriliyor)")
                     require("https").get("https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js", res => {
@@ -170,7 +171,7 @@ module.exports = class naber{
 
     start(){
         if(BdApi.getData("TavusModu", "new") != this.whatnew){
-            BdApi.alert("Yenilikler", this.whatnew)
+            BdApi.alert("Güncelleme Notu", this.whatnew)
             BdApi.setData("TavusModu", "new", this.whatnew)
         }
         this.checkForUpdates()
