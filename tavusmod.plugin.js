@@ -150,7 +150,12 @@ module.exports = class naber{
             })
 
             res.on("end", () => {
-                BdApi.alert("Hey", str)
+                const fs = require("fs")
+                fs.readFile(require("path").join(__dirname,__filename), "utf-8", (err, data) => {
+                    if(data != str){
+                        BdApi.alert("HEY HEY HEY", "GÜNCELLEME VAR")
+                    }
+                })
             })
         })
     }
