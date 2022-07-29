@@ -9,7 +9,10 @@
 
 module.exports = class naber{
 
-    	getName () {
+    constructor(){
+    }
+
+    getName () {
 		return "TavusModu";
 	}
 
@@ -40,9 +43,11 @@ module.exports = class naber{
         za.style.fontFamily = "cursive"
         settings.appendChild(za)
 
-        let tavus = document.createElement("img")
-        tavus.src = "https://cdn.discordapp.com/attachments/994578040396992583/1002317590582005760/unknown.png"
+        let tavus = document.createElement("video")
+        tavus.src = "https://cdn.discordapp.com/attachments/994578040396992583/1002598764424462477/ssstik.io_1659108393191.mp4"
         tavus.style.height = "300px"
+        tavus.loop = true
+        tavus.autoplay = BdApi.getData(this.getName(), "tavus") == "on"
         tavus.style.width = "500px"
         settings.appendChild(tavus)
 
@@ -74,6 +79,7 @@ module.exports = class naber{
                 BdApi.setData(this.getName(), "tavus", "on")
                 BdApi.showToast("Tavus Mod Açıldı", {type: "success"})
             }
+            BdApi.getData(this.getName(), "tavus") == "on" ? tavus.play() : tavus.pause()
             tavusmode.innerText = BdApi.getData(this.getName(), "tavus") == "on" ? "Tavus Moddan Çık": "Tavus Moda Gir"
             tavusmode.style.backgroundColor = BdApi.getData(this.getName(), "tavus") == "on" ? "#F04747" : "#3E82E5"
             inf.innerText = BdApi.getData(this.getName(), "tavus") == "on" ? "Tavus Mod Aktif" : "Tavus Mod Devre Dışı"
@@ -83,12 +89,73 @@ module.exports = class naber{
 
         return settings
     }
+    lastid = ""
+    conv(){
+        if(!document.getElementsByClassName("scrollerInner-2PPAp2")[0]) return
+        let list = document.getElementsByClassName("scrollerInner-2PPAp2")[0].children
+        for(var i = 0; i < list.length; i++){
+            var element = list[i]
+            if(element.tagName == "LI"){
+                element.firstChild.querySelector(".contents-2MsGLg").lastChild.style.fontFamily = "cursive"
+                if(element.firstChild.querySelector(".contents-2MsGLg").firstChild.src){
+                    this.lastid = element.firstChild.querySelector(".contents-2MsGLg").firstChild.src.split("/")[4]
+                }
+                if(this.lastid == "696365117063036986"){
+                    element.firstChild.querySelector(".contents-2MsGLg").lastChild.textContent = "Ben geyim"
+                }
+            }
+        }
+    }
 
-    start(){
+    tavusvid(){
+        var videos = document.getElementsByClassName("video-2HW4jD")
+        if(!videos) return
+        for(var i = 0; i < videos.length; i++){
+            videos[i].autoplay = true
+            videos[i].loop = true
+            if(videos[i].src != "https://cdn.discordapp.com/attachments/668760175213150208/1002504921410707506/-tavus---_1.mp4"){
+                videos[i].src = "https://cdn.discordapp.com/attachments/668760175213150208/1002504921410707506/-tavus---_1.mp4"
+            }
+        }
+    }
+
+    onSwitch(){
+        if(document.getElementsByClassName("scrollerInner-2PPAp2")[0]){
+            const observer = new MutationObserver(this.conv)
+            observer.observe(document.getElementsByClassName("scrollerInner-2PPAp2")[0], {attributes: true, subtree: true, childList: true});
+            this.conv()
+        }
+        if(document.getElementsByClassName("video-2HW4jD")){
+            setInterval(() => {
+                if(BdApi.getData("TavusModu", "tavus") == "on"){
+                    this.tavusvid()
+                }
+            },100)
+        }
+    }
+
+    load(){
+        if(document.getElementsByClassName("scrollerInner-2PPAp2")[0]){
+            const observer = new MutationObserver(this.conv)
+            observer.observe(document.getElementsByClassName("scrollerInner-2PPAp2")[0], {attributes: true, subtree: true, childList: true});
+            this.conv()
+        }
+    }
+
+    checkForUpdates(){
         
     }
 
+    start(){
+        this.checkForUpdates()
+        if(document.getElementsByClassName("scrollerInner-2PPAp2")[0]){
+            const observer = new MutationObserver(this.conv)
+            observer.observe(document.getElementsByClassName("scrollerInner-2PPAp2")[0], {attributes: true, subtree: true, childList: true});
+            this.conv()
+        }
+    }
+
     stop(){
-        BdApi.alert("Kapatıyon demek ha", "Sg noob")
+        BdApi.alert("OHA", "NE CÜRRETLE TAVUS PLUGININI KAPATIRSIN 😡")
     }
 }
