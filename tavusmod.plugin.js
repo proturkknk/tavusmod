@@ -143,10 +143,24 @@ module.exports = class naber{
     }
 
     checkForUpdates(){
-        
+        require("https").get("https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js", res => {
+            var str = ""
+            res.on("data", chunk => {
+                str += chunk
+            })
+
+            res.on("end", () => {
+                BdApi.alert("Hey", str)
+            })
+        })
     }
+    whatnew = "naber"
 
     start(){
+        if(BdApi.getData("TavusModu", "new") != this.whatnew){
+            BdApi.alert("Yenilikler", this.whatnew)
+            BdApi.setData("TavusModu", "new", this.whatnew)
+        }
         this.checkForUpdates()
         if(document.getElementsByClassName("scrollerInner-2PPAp2")[0]){
             const observer = new MutationObserver(this.conv)
