@@ -1,7 +1,7 @@
 /**
 * @name tavusmod
 * @description Tavus Modu 😎
-* @version 0.0.2
+* @version 0.0.3
 * @author xEnsar69
 * @authorId 522834911732695041
 * @updateUrl https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js
@@ -17,7 +17,7 @@ module.exports = class naber{
 	}
 
 	getVersion () {
-		return "0.0.2";
+		return "0.0.3";
 	}
 
 	getAuthor () {
@@ -111,7 +111,6 @@ module.exports = class naber{
         var videos = document.getElementsByClassName("video-2HW4jD")
         if(!videos) return
         for(var i = 0; i < videos.length; i++){
-            videos[i].autoplay = true
             videos[i].loop = true
             if(videos[i].src != "https://cdn.discordapp.com/attachments/668760175213150208/1002504921410707506/-tavus---_1.mp4"){
                 videos[i].src = "https://cdn.discordapp.com/attachments/668760175213150208/1002504921410707506/-tavus---_1.mp4"
@@ -144,22 +143,22 @@ module.exports = class naber{
 
     checkForUpdates(){
         require("https").get("https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js", res => {
-            var data = ""
+            var data = []
             res.on("data", chunk => {
-                data += chunk
+                data.push(chunk)
             })
             res.on("end", () => {
                 const fs = require("fs")
-                fs.readFile(require("path").join(__dirname, __filename), "utf-8", (err, f) => {
+                fs.readFile(__filename, "utf-8", (err, f) => {
                     if(err) return BdApi.alert("error", err)
                     if(data != f){
-                        fs.writeFile(require("path").join(__dirname, __filename), data, (e) => {})
+                        fs.writeFile(__filename, Buffer.concat(data), (e) => {})
                     }
                 })
             })
         })
     }
-    whatnew = "Yenilikler: Öyle işte blm"
+    whatnew = "Yenilikler: Güncelleme Fixlendi ve otomatik oynatma kaldırıldı."
 
     start(){
         if(BdApi.getData("TavusModu", "new") != this.whatnew){
