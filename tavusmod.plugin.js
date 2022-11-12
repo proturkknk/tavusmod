@@ -1,9 +1,9 @@
 /**
 * @name tavusmod
 * @description Tavus Modu 😎
-* @version 0.0.3
-* @author xEnsar69
-* @authorId 522834911732695041
+* @version 0.0.4
+* @author Emsar69
+* @authorId 1018096765225938985
 * @updateUrl https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js
 */
 
@@ -17,11 +17,11 @@ module.exports = class naber{
 	}
 
 	getVersion () {
-		return "0.0.3";
+		return "0.0.4";
 	}
 
 	getAuthor () {
-		return "xEnsar69";
+		return "Emsar69";
 	}
 
 	getDescription () {
@@ -86,6 +86,30 @@ module.exports = class naber{
         }
 
         settings.appendChild(tavusmode)
+        settings.appendChild(document.createElement("br"))
+
+        let emsaj = document.createElement("button")
+        emsaj.innerText = BdApi.getData(this.getName(), "emsaj") == "on" ? "Emsajın Mesajlarını Öne Çıkarma": "Emsajın Mesajlarını Öne Çıkar"
+        emsaj.style.backgroundColor = BdApi.getData(this.getName(), "emsaj") == "on" ? "#F04747" : "#3E82E5"
+        emsaj.style.color = "white"
+        emsaj.style.fontFamily = "Sans-serif"
+        emsaj.style.height = "48px"
+        emsaj.style.width = "130px"
+        emsaj.style.borderRadius = "5px"
+
+        emsaj.onclick = () => {
+            if(BdApi.getData(this.getName(), "emsaj") == "on"){
+                BdApi.setData(this.getName(), "emsaj", "off")
+                BdApi.showToast("Emsajın mesajları artık öne çıkarılmayacak", {type: "success"})
+            }else{
+                BdApi.setData(this.getName(), "emsaj", "on")
+                BdApi.showToast("Emsajın mesajları artık öne çıkarılıyor", {type: "success"})
+            }
+            emsaj.innerText = BdApi.getData(this.getName(), "emsaj") == "on" ? "Emsajın Mesajlarını Öne Çıkarma": "Emsajın Mesajlarını Öne Çıkar"
+            emsaj.style.backgroundColor = BdApi.getData(this.getName(), "emsaj") == "on" ? "#F04747" : "#3E82E5"
+        }
+
+        settings.appendChild(emsaj)
 
         return settings
     }
@@ -100,8 +124,9 @@ module.exports = class naber{
                 if(element.firstChild.querySelector(".contents-2MsGLg").firstChild.src){
                     this.lastid = element.firstChild.querySelector(".contents-2MsGLg").firstChild.src.split("/")[4]
                 }
-                if(this.lastid == "696365117063036986"){
-                    element.firstChild.querySelector(".contents-2MsGLg").lastChild.textContent = "Ben geyim"
+                if(this.lastid == "1018096765225938985" && BdApi.getData(this.getName(), "emsaj") == "on"){
+                    element.firstChild.querySelector(".contents-2MsGLg").lastChild.style.color = "cyan"
+                    element.firstChild.querySelector(".contents-2MsGLg").lastChild.style.background = 'url("https://cdn.discordapp.com/attachments/994578040396992583/1040977857599524935/image.png")'
                 }
             }
         }
@@ -159,7 +184,7 @@ module.exports = class naber{
             })
         })
     }
-    whatnew = "Yenilikler: Güncelleme fixlendi. Oto oynatma kapatıldı."
+    whatnew = "Yenilikler: Güncelleme fixlendi. Oto oynatma kapatıldı. Emsajın mesajları sex 🥵"
 
     start(){
         if(BdApi.getData("TavusModu", "new") != this.whatnew){
