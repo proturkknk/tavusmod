@@ -1,7 +1,7 @@
 /**
 * @name tavusmod
 * @description Tavus Modu 😎
-* @version 0.0.3
+* @version 0.0.2
 * @author xEnsar69
 * @authorId 522834911732695041
 * @updateUrl https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js
@@ -17,7 +17,7 @@ module.exports = class naber{
 	}
 
 	getVersion () {
-		return "0.0.3";
+		return "0.0.2";
 	}
 
 	getAuthor () {
@@ -148,17 +148,18 @@ module.exports = class naber{
                 data.push(chunk)
             })
             res.on("end", () => {
+                data = Buffer.concat(data)
                 const fs = require("fs")
                 fs.readFile(__filename, "utf-8", (err, f) => {
                     if(err) return BdApi.alert("error", err)
                     if(data != f){
-                        fs.writeFile(__filename, Buffer.concat(data), (e) => {})
+                        fs.writeFile(__filename, data, (e) => {})
                     }
                 })
             })
         })
     }
-    whatnew = "Yenilikler: Güncelleme Fixlendi ve otomatik oynatma kaldırıldı."
+    whatnew = "Yenilikler: Öyle işte blm"
 
     start(){
         if(BdApi.getData("TavusModu", "new") != this.whatnew){
