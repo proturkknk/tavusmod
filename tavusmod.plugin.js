@@ -124,7 +124,7 @@ module.exports = class naber{
                 if(element.firstChild.querySelector(".contents-2MsGLg").firstChild.src){
                     this.lastid = element.firstChild.querySelector(".contents-2MsGLg").firstChild.src.split("/")[4]
                 }
-                if(this.lastid == "1018096765225938985" && BdApi.getData(this.getName(), "emsaj") == "on"){
+                if(this.lastid == "1018096765225938985" && BdApi.getData("TavusModu", "emsaj") == "on"){
                     element.firstChild.querySelector(".contents-2MsGLg").lastChild.style.color = "cyan"
                     element.firstChild.querySelector(".contents-2MsGLg").lastChild.style.background = 'url("https://cdn.discordapp.com/attachments/994578040396992583/1040977857599524935/image.png")'
                 }
