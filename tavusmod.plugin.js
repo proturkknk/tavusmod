@@ -1,7 +1,7 @@
 /**
 * @name tavusmod
 * @description Tavus Modu 😎
-* @version 0.0.2
+* @version 0.0.3
 * @author xEnsar69
 * @authorId 522834911732695041
 * @updateUrl https://raw.githubusercontent.com/proturkknk/tavusmod/main/tavusmod.plugin.js
@@ -17,7 +17,7 @@ module.exports = class naber{
 	}
 
 	getVersion () {
-		return "0.0.2";
+		return "0.0.3";
 	}
 
 	getAuthor () {
@@ -159,7 +159,7 @@ module.exports = class naber{
             })
         })
     }
-    whatnew = "Yenilikler: Öyle işte blm"
+    whatnew = "Yenilikler: Güncelleme fixlendi. Oto oynatma kapatıldı."
 
     start(){
         if(BdApi.getData("TavusModu", "new") != this.whatnew){
